@@ -1,10 +1,8 @@
-from product import Product
-
-class Cart:
+class ShoppingCart:
     def __init__(self) -> None:
-        self.items: list[Product] = []
+        self.items: list = []
 
-    def add_product(self, product: Product) -> None:
+    def add_product(self, product) -> None:
         self.items.append(product)
 
     def remove_product(self, product_id: str) -> bool:
@@ -14,11 +12,14 @@ class Cart:
                 return True
         return False
 
-    def get_items(self) -> list[Product]:
+    def get_items(self) -> list:
         return self.items
 
     def calculate_total(self) -> float:
-        return round(sum(item.get_price() for item in self.items), 2)
+        return float(sum(item.get_price() for item in self.items))
 
     def is_empty(self) -> bool:
         return len(self.items) == 0
+
+# this naming thing is messing me up too much so I'm just going to alias it
+cart = ShoppingCart
