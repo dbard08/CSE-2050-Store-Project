@@ -1,4 +1,4 @@
-class Store:
+class store:
 
   def __init__(self) -> None:
     self.products: list = []

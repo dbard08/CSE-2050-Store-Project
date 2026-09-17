@@ -1,4 +1,4 @@
-class ShoppingCart:
+class cart:
 
   def __init__(self) -> None:
     self.items: list = []
