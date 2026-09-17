@@ -1,3 +1,6 @@
+from cart import cart
+
+
 class customer:
     def __init__(self, customer_id:str, name:str):
         self.customer_id = customer_id

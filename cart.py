@@ -1,3 +1,5 @@
+from product import product
+
 class cart:
 
   def __init__(self) -> None:

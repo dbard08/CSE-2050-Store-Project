@@ -1,3 +1,6 @@
+from product import product
+from customer import customer
+
 class store:
 
   def __init__(self) -> None:
