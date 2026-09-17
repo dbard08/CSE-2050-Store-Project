@@ -1,23 +1,20 @@
-class product:
-    def __init__(self, name:str, price: float, product_id: str):
+class Product:
+    def __init__(self, name: str, price: float, product_id: str) -> None:
         self.name = name
-        self.price = price
+        self.price = float(price)
         self.product_id = product_id
 
-    def get_id(self):
+    def get_id(self) -> str:
         return self.product_id
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.name
 
-    def get_price(self):
+    def get_price(self) -> float:
+        return self.price
+
+    def get_formatted_price(self) -> str:
         return f"${self.price:.2f}"
 
-
-
-if __name__ == "__main__":
-    p1 = product("Banana", 7.00, "BAN123")
-    print(p1.get_id())
-    print(p1.get_name())
-    print(p1.get_price())
-
+    def __repr__(self) -> str:
+        return f"Product(id='{self.product_id}', name='{self.name}', price={self.price:.2f})"
