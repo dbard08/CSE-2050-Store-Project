@@ -1,5 +1,6 @@
 from order import Order
 from order_queue import OrderQueue
+from algorithms import selection_sort, insertion_sort, binary_search
 
 
 class Store:
@@ -81,6 +82,23 @@ class Store:
 
     def get_order_history(self) -> list:
         return self.order_history
+
+    def insertion_sort_products(self):
+        """Sort stores products by ID using insertion sort"""
+        insertion_sort(self.products)
+
+    def selection_sort_products(self):
+        """Sort stores products by ID using selection sort"""
+        selection_sort(self.products)
+
+    def binary_search_product(self, product_id):
+        """Return the product with ID from the sorted list or none"""
+        index = binary_search(self.products, product_id)
+        if index == -1:
+            return None
+        return self.products[index]
+
+    
 
 
 store = Store
