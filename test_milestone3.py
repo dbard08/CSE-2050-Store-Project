@@ -5,12 +5,10 @@ from algorithms import selection_sort, insertion_sort, binary_search
 
 
 def make_products(ids):
-    """Build a list of Product objects from a list of ID strings."""
     return [Product(pid, "Item " + pid, 10.0) for pid in ids]
 
 
 def get_ids(products):
-    """Return just the ID strings from a list of Products."""
     return [p.get_id() for p in products]
 
 
@@ -64,7 +62,9 @@ class TestStoreSortAndSearch(unittest.TestCase):
     def test_binary_lookup(self):
         self.store.insertion_sort_products()
         product = self.store.binary_search_product("P200")
-        self.assertEqual(product.get_name(), "Headphones")
+        self.assertIsNotNone(product)
+        if product is not None:
+            self.assertEqual(product.get_name(), "Headphones")
 
 
 if __name__ == "__main__":
