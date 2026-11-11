@@ -81,3 +81,80 @@ def binary_search(products, product_id):
             high = mid - 1
 
     return -1
+
+
+def merge_sort(products):
+    # split list in half recursively then merge back sorted
+    if len(products) <= 1:
+        return
+    
+    mid = len(products) // 2
+    left_half = products[:mid]
+    right_half = products[mid:]
+    
+    merge_sort(left_half)
+    merge_sort(right_half)
+    
+    i = j = k = 0
+    while i < len(left_half) and j < len(right_half):
+        if left_half[i].get_id() <= right_half[j].get_id():
+            products[k] = left_half[i]
+            i += 1
+        else:
+            products[k] = right_half[j]
+            j += 1
+        k += 1
+        
+    while i < len(left_half):
+        products[k] = left_half[i]
+        i += 1
+        k += 1
+        
+    while j < len(right_half):
+        products[k] = right_half[j]
+        j += 1
+        k += 1
+
+
+def quick_sort(products):
+    # sort inplace using a pivot
+    _quick_sort_helper(products, 0, len(products) - 1)
+
+
+def _quick_sort_helper(products, low, high):
+    if low < high:
+        pi = _partition(products, low, high)
+        _quick_sort_helper(products, low, pi - 1)
+        _quick_sort_helper(products, pi + 1, high)
+
+
+def _partition(products, low, high):
+    pivot = products[high].get_id()
+    i = low - 1
+    for j in range(low, high):
+        if products[j].get_id() <= pivot:
+            i += 1
+            products[i], products[j] = products[j], products[i]
+    products[i + 1], products[high] = products[high], products[i + 1]
+    return i + 1
+
+
+def quick_select(products, k):
+    # find smallest product without full sorting
+    if k < 1 or k > len(products):
+        return None
+    return _quick_select_helper(products, 0, len(products) - 1, k - 1)
+
+
+def _quick_select_helper(products, low, high, k_idx):
+    if low == high:
+        return products[low]
+    
+    pi = _partition(products, low, high)
+    
+    if k_idx == pi:
+        return products[pi]
+    elif k_idx < pi:
+        return _quick_select_helper(products, low, pi - 1, k_idx)
+    else:
+        return _quick_select_helper(products, pi + 1, high, k_idx)
