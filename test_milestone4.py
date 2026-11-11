@@ -20,7 +20,7 @@ class TestMergeSort(unittest.TestCase): #groups our merge sort test together
             Product("P100", "Headphones", 39.99)
         ]
         merge_sort(products)
-        self.asserEqual(
+        self.assertEqual(
             [p.get_id() for p in products],
             ["P100","P200","P300"]
         )
@@ -38,37 +38,37 @@ class TestMergeSort(unittest.TestCase): #groups our merge sort test together
             ["P200", "P100", "P100"]
         )
 
-    class TestQuickSort(unittest.TestCase):
-        def test_empty_list(self):
-            products = []
-            quick_sort(products)
-            self.assertEqual(products, [])
+class TestQuickSort(unittest.TestCase):
+    def test_empty_list(self):
+        products = []
+        quick_sort(products)
+        self.assertEqual(products, [])
 
-        def test_already_sorted(self):
-            products = [
-                Product("P100", "Mouse", 20.00),
-                Product("P200", "Keyboard", 30.00),
-                Product("P300", "Headphones", 39.99)
-            ]
+    def test_already_sorted(self):
+        products = [
+            Product("P100", "Mouse", 20.00),
+            Product("P200", "Keyboard", 30.00),
+            Product("P300", "Headphones", 39.99)
+        ]
 
-            quick_sort(products)
-            self.assertEqual(
-                [p.get_id() for p in products],
-                ["P100", "P200","P300"]
-            )
+        quick_sort(products)
+        self.assertEqual(
+            [p.get_id() for p in products],
+            ["P100", "P200","P300"]
+        )
 
-        def test_reverse_order(self):
-            products = [
-                Product("P300", "Mouse", 20.00),
-                Product("P200", "Keyboard", 30.00),
-                Product("P100", "Headphones", 39.99)
-            ]
+    def test_reverse_order(self):
+        products = [
+            Product("P300", "Mouse", 20.00),
+            Product("P200", "Keyboard", 30.00),
+            Product("P100", "Headphones", 39.99)
+         ]
 
-            quick_sort(products)
-            self.assertEqual(
-                [p.get_id() for p in products],
-                ["P100","P200","P300"]
-            )
+        quick_sort(products)
+        self.assertEqual(
+            [p.get_id() for p in products],
+            ["P100","P200","P300"]
+        )
 class TestQuickSelect(unittest.TestCase):
     def test_first_rank(self):
         products = [
@@ -80,22 +80,24 @@ class TestQuickSelect(unittest.TestCase):
         result = quick_select(products, 1)
         self.assertEqual(result.get_id(), "P100")
 
-        def test_middle_rank(self):
-            products = [
-                Product("P300", "Mouse", 20.00),
-                Product("P200", "Keyboard", 30.00),
-                Product("P100", "Headphones", 39.99)   
-            ]
-            quick_select(products, 2)
-            self.assertEqual(result.get_id(), "P200")
+    def test_middle_rank(self):
+        products = [
+            Product("P300", "Mouse", 20.00),
+            Product("P200", "Keyboard", 30.00),
+            Product("P100", "Headphones", 39.99)   
+        ]
+ 
+        result = quick_select(products, 2 )
+        
+        self.assertEqual(result.get_id(), "P200")
 
-            def test_invalid_rank(self):
-                products = [
-                    Product("P100", "Keyboard", 30.00),
-                    Product("P200", "Headphones", 39.99)
-                ]
-                result = quick_select(products, 0)
-                self.assertIsNone(result)
+    def test_invalid_rank(self):
+        products = [
+            Product("P100", "Keyboard", 30.00),
+            Product("P200", "Headphones", 39.99)
+        ]
+        result = quick_select(products, 0)
+        self.assertIsNone(result)
 class TestHashMapping(unittest.TestCase):
     def test_put_and_get(self):
         mapping = HashMapping(size = 3)
