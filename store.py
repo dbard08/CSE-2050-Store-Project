@@ -1,5 +1,6 @@
 from order import Order
 from order_queue import OrderQueue
+from hash_mapping import HashMapping #?
 from algorithms import (
     bubble_sort,
     selection_sort,
@@ -7,8 +8,14 @@ from algorithms import (
     binary_search,
     recursive_total_price,
     fewest_coins,
+    merge_sort,
+    quick_sort,
+    quick_select,
 )
-
+''' im going to start putting a lot of comments down 
+for each line of code in a way of review for the upcoming exam, 
+im sorry in advance T_T, I will try to make it clean - Noah
+'''
 
 class Store:
     def __init__(self):
@@ -17,20 +24,22 @@ class Store:
         self.orders = []
         self.order_queue = OrderQueue()
         self.order_history = []
+        self.product_mapping = HashMapping(size=2)  # map for fast product lookup
 
     def add_product(self, product):
         if self.find_product(product.get_id()) is not None:
             return False
 
         self.products.append(product)
+        self.product_mapping.put(product.get_id(), product)  # save in hash table too
         return True
 
     def find_product(self, product_id):
-        for product in self.products:
-            if product.get_id() == product_id:
-                return product
-
-        return None
+        # find product fast using hash map instead of scanning whole list
+        try:
+            return self.product_mapping.get(product_id)
+        except KeyError:
+            return None
 
     def add_customer(self, customer):
         if self.find_customer(customer.get_id()) is not None:
@@ -110,6 +119,15 @@ class Store:
 
     def calculate_change(self, coins, amount):
         return fewest_coins(coins, amount)
+
+    def merge_sort_products(self):
+        merge_sort(self.products) # d&c sort
+
+    def quick_sort_products(self):
+        quick_sort(self.products) # pivot sort 
+
+    def quick_select_product(self, k):
+        return quick_select(self.products, k) # find kth rank fast without sorting all
 
 
 store = Store
